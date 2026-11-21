@@ -45,3 +45,62 @@
 .creator-project .project-info{padding:35px}
 @media(max-width:800px){.scroll-hero-copy{right:6%;width:53vw;bottom:14%}.scroll-hero-copy h1{font-size:clamp(36px,5vw,54px)}.creator-project{display:block}.creator-project .project-media{aspect-ratio:16/10}}
 @media(max-width:520px){.scroll-hero-copy{left:auto;right:5%;width:67vw;bottom:13%}.scroll-hero-copy h1{font-size:clamp(30px,8vw,42px)}.scroll-hero-copy .eyebrow{font-size:9px;letter-spacing:.1em}.scroll-hero-copy p:not(.eyebrow){font-size:12px;line-height:1.5}.scroll-hero-copy .button{padding:11px 19px;font-size:13px}.hero-scene-shade{background:linear-gradient(270deg,#080712bf,#08071234 75%,transparent),linear-gradient(0deg,#08071275,transparent 55%)}.subsection-heading{margin-top:60px}.creator-project .project-info{padding:26px 30px}}
+
+.about-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(28px, 6vw, 92px);
+  scroll-margin-top: 24px;
+}
+
+.about-intro h2 {
+  margin: 0;
+  color: #e2c8f4;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+}
+
+.about-intro h2 span {
+  color: #bfb2d0;
+  font-weight: 500;
+}
+
+.about-statement {
+  margin: 24px 0 18px;
+  font-size: clamp(1.875rem, 4.1vw, 3.75rem);
+  font-weight: 700;
+  letter-spacing: -.045em;
+  line-height: 1.28;
+}
+
+.about-roles {
+  margin: 0;
+  color: #ccbedc;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.about-bio {
+  color: #d5ccdf;
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.9;
+}
+
+.about-bio p {
+  margin: 0 0 1em;
+}
+
+.about-bio p:last-child {
+  margin-bottom: 0;
+}
+
+.about-bio strong {
+  color: #f0d4ff;
+  font-weight: 700;
+}
+
+@media (max-width: 920px) {
+  .about-section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
