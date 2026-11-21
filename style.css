@@ -89,3 +89,98 @@
   color: #f0d4ff;
   font-weight: 700;
 }
+
+.social-profiles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 720px;
+  margin: 32px auto 0;
+  text-align: left;
+}
+
+.social-profile {
+  --spotlight-x: 85%;
+  --spotlight-y: 0%;
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22px;
+  min-height: 148px;
+  padding: clamp(20px, 3vw, 30px);
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background:
+    linear-gradient(145deg, #2b2339, #191725 85%) padding-box,
+    radial-gradient(200px circle at var(--spotlight-x) var(--spotlight-y),
+      rgb(var(--spotlight-color) / var(--spotlight-edge, 0)), #514360 100%) border-box;
+}
+
+.social-profile--red {
+  --spotlight-color: 255 121 155;
+}
+
+.social-profile--bilibili {
+  --spotlight-color: 116 212 255;
+}
+
+.social-profile::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(240px circle at var(--spotlight-x) var(--spotlight-y),
+    rgb(var(--spotlight-color) / .26), transparent 100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .24s ease;
+  content: "";
+}
+
+.social-profile:is(:hover, :active, :focus-visible) {
+  --spotlight-edge: .74;
+}
+
+.social-profile:is(:hover, :active, :focus-visible)::before {
+  opacity: 1;
+}
+
+.social-profile:focus-visible {
+  outline: 2px solid rgb(var(--spotlight-color));
+  outline-offset: 3px;
+}
+
+.social-profile-name {
+  color: #f7f1ff;
+  font-size: clamp(1.2rem, 2.3vw, 1.6rem);
+  font-weight: 700;
+}
+
+.social-profile-detail {
+  color: #ddcfe9;
+  font-size: .9rem;
+}
+
+.social-profile-detail [aria-hidden] {
+  margin-left: .2em;
+  color: rgb(var(--spotlight-color));
+}
+
+@media (max-width: 520px) {
+  .social-profiles {
+    gap: 10px;
+  }
+
+  .social-profile {
+    min-height: 116px;
+    gap: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .social-profile::before {
+    transition: none;
+  }
+}

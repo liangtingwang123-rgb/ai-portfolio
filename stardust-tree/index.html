@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#100a10">
+    <meta name="description" content="让星尘聚成一棵圣诞树。用手势、键盘或触屏控制星尘。">
+    <title>圣诞星尘 · Stardust Tree</title>
+    <link rel="icon" href="./assets/favicon-DNkoRiff.png">
+    <script type="module" crossorigin src="./assets/index-Bi-4N5mm.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-cmXa4kYc.css">
+  </head>
+  <body>
+    <div class="experience">
+      <header class="header">
+        <div class="wordmark"><span class="sparkle" aria-hidden="true"></span> Stardust Tree</div>
+        <span class="privacy"><span class="lock-icon" aria-hidden="true"></span>画面仅在本机处理</span>
+      </header>
+
+      <main>
+        <div class="intro">
+          <a class="portfolio-back" href="../index.html#vibe-coding" hidden>返回作品集</a>
+          <h1>圣诞星尘<span class="title-star" aria-hidden="true">✦</span></h1>
+          <p>抬手种下一棵星尘树，摆摆手让它散成星光。</p>
+        </div>
+
+        <div class="layout">
+          <div class="display">
+            <section class="camera panel" data-camera-state="idle" aria-label="摄像头预览">
+              <div class="panel-label"><span class="video-icon" aria-hidden="true"></span> 摄像头</div>
+              <div class="camera-indicator"><span class="indicator-dot" aria-hidden="true"></span><span id="camera-indicator">未开启</span></div>
+              <video id="camera-video" playsinline muted aria-label="镜像摄像头画面"></video>
+              <canvas id="hand-overlay" aria-hidden="true"></canvas>
+              <div class="camera-placeholder" aria-hidden="true">
+                <div class="viewfinder"><span class="video-icon"></span></div>
+              </div>
+            </section>
+
+            <section class="stage panel" aria-labelledby="stage-label">
+              <canvas id="tree-canvas" role="img" aria-label="玫瑰金圣诞树，树上挂着粉色饰品、暖灯和金色树顶星"></canvas>
+              <img class="stage-reference" src="./assets/stage-reference-Bhvio-f0.png" width="1254" height="1254" alt="" aria-hidden="true" fetchpriority="high">
+              <canvas id="effects-canvas" aria-hidden="true"></canvas>
+              <div class="panel-label" id="stage-label"><span class="pixel-icon" aria-hidden="true"></span> 粒子舞台</div>
+              <div class="stage-status" data-target="gathered"><span class="indicator-dot" aria-hidden="true"></span><span id="tree-status" aria-live="polite">圣诞树</span></div>
+            </section>
+          </div>
+
+          <aside class="controls panel" aria-label="互动控制">
+            <section class="control-section" aria-labelledby="camera-heading">
+              <h2 id="camera-heading">手势控制</h2>
+              <p>两只手可以同时入镜，每只手都能触发手势。</p>
+              <button type="button" class="camera-button" id="camera-button"><span class="video-icon" aria-hidden="true"></span><span id="camera-button-label">开启摄像头</span></button>
+              <p class="camera-feedback" id="camera-feedback" aria-live="polite" hidden></p>
+            </section>
+            <section class="control-section manual-controls" aria-labelledby="manual-heading">
+              <h2 id="manual-heading">舞台动作</h2>
+              <p>在镜头前做手势，也可以按数字键或点按按钮。</p>
+              <div class="gesture-list" role="group" aria-label="舞台动作">
+                <button type="button" class="gesture-button" data-action="gather" aria-pressed="true" aria-keyshortcuts="1">
+                  <span class="gesture-symbol tree-symbol" aria-hidden="true"></span>
+                  <span class="gesture-text"><strong>聚合成树</strong><small>握拳</small></span>
+                  <kbd>1</kbd>
+                </button>
+                <button type="button" class="gesture-button" data-action="scatter" aria-pressed="false" aria-keyshortcuts="2">
+                  <span class="gesture-symbol dust-symbol" aria-hidden="true">✦</span>
+                  <span class="gesture-text"><strong>散作星尘</strong><small>张掌左右摆手</small></span>
+                  <kbd>2</kbd>
+                </button>
+                <button type="button" class="gesture-button" data-action="grow" aria-keyshortcuts="3">
+                  <span class="gesture-symbol action-symbol" aria-hidden="true">↑</span>
+                  <span class="gesture-text"><strong>从地面长出</strong><small>整只手向上抬</small></span>
+                  <kbd>3</kbd>
+                </button>
+                <button type="button" class="gesture-button" data-action="spin" aria-keyshortcuts="4">
+                  <span class="gesture-symbol action-symbol" aria-hidden="true">↻</span>
+                  <span class="gesture-text"><strong>旋转圣诞树</strong><small>张掌保持不动</small></span>
+                  <kbd>4</kbd>
+                </button>
+                <button type="button" class="gesture-button" data-action="firework" aria-keyshortcuts="5">
+                  <span class="gesture-symbol action-symbol" aria-hidden="true">✷</span>
+                  <span class="gesture-text"><strong>点亮烟花</strong><small>拇指碰中指后弹开</small></span>
+                  <kbd>5</kbd>
+                </button>
+                <button type="button" class="gesture-button" data-action="deer" aria-keyshortcuts="6">
+                  <span class="gesture-symbol action-symbol" aria-hidden="true">◌</span>
+                  <span class="gesture-text"><strong>召唤小鹿</strong><small>伸食指画圈</small></span>
+                  <kbd>6</kbd>
+                </button>
+              </div>
+              <p id="effect-feedback" class="effect-feedback" role="status"></p>
+            </section>
+          </aside>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
