@@ -269,6 +269,12 @@
   font-size: 1.25rem;
 }
 
+.project-cases li + li {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #b292de40;
+}
+
 .project-cases a {
   display: inline-block;
   margin-top: 12px;
