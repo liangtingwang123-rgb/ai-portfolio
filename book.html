@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="翻阅绘本《菜籽沟》。">
+  <meta name="theme-color" content="#14101e">
+  <title>《菜籽沟》· 绘本</title>
+  <link rel="stylesheet" href="book.css">
+  <script src="book.js" defer></script>
+</head>
+<body>
+  <header class="reader-top">
+    <a href="index.html#picture-book">返回作品集</a>
+  </header>
+  <main class="reader" aria-labelledby="reader-title">
+    <header class="reader-heading">
+      <p class="reader-kicker">绘本</p>
+      <h1 id="reader-title">菜籽沟</h1>
+    </header>
+
+    <div class="book-shell">
+      <button class="book-spread" type="button" aria-label="翻到下一页" aria-describedby="book-hint" aria-controls="book-page">
+        <img id="book-page" class="book-image" src="assets/book/page-01.webp" width="2200" height="1100" alt="《菜籽沟》封面展开图" fetchpriority="high" draggable="false">
+        <span class="book-static" aria-hidden="true" hidden><img alt="" draggable="false"></span>
+        <span class="book-spine" aria-hidden="true"></span>
+        <span class="book-leaf" aria-hidden="true" hidden>
+          <span class="book-face book-front"><img alt="" draggable="false"></span>
+          <span class="book-face book-back"><img alt="" draggable="false"></span>
+        </span>
+      </button>
+    </div>
+
+    <nav class="reader-controls" aria-label="绘本翻页">
+      <button id="previous-page" type="button" aria-controls="book-page" disabled>上一页</button>
+      <output id="page-status" aria-live="polite" aria-atomic="true">1 / 18</output>
+      <button id="next-page" type="button" aria-controls="book-page" disabled>下一页</button>
+    </nav>
+    <p class="reader-hint" id="book-hint">点击书页向后翻，或左右拖动。也可以使用方向键。</p>
+    <button class="reader-zoom" id="open-detail" type="button" aria-haspopup="dialog" aria-controls="book-detail" hidden>放大本页</button>
+    <p class="reader-error" id="reader-error" role="status" hidden></p>
+  </main>
+
+  <dialog class="reader-detail" id="book-detail" aria-labelledby="detail-title">
+    <header class="detail-header">
+      <h2 id="detail-title">放大阅读</h2>
+      <form method="dialog"><button type="submit" autofocus>关闭</button></form>
+    </header>
+    <div class="detail-viewport" tabindex="0" aria-label="左右滑动查看完整书页">
+      <img id="detail-image" alt="">
+    </div>
+  </dialog>
+
+  <template id="book-pages">
+    <img src="assets/book/page-01.webp" alt="《菜籽沟》封面展开图">
+    <img src="assets/book/page-02.webp" alt="《菜籽沟》第 2 跨页：浅蓝色环衬">
+    <img src="assets/book/page-03.webp" alt="《菜籽沟》第 3 跨页：扉页与版权信息">
+    <img src="assets/book/page-04.webp" alt="《菜籽沟》第 4 跨页">
+    <img src="assets/book/page-05.webp" alt="《菜籽沟》第 5 跨页">
+    <img src="assets/book/page-06.webp" alt="《菜籽沟》第 6 跨页">
+    <img src="assets/book/page-07.webp" alt="《菜籽沟》第 7 跨页">
+    <img src="assets/book/page-08.webp" alt="《菜籽沟》第 8 跨页">
+    <img src="assets/book/page-09.webp" alt="《菜籽沟》第 9 跨页">
+    <img src="assets/book/page-10.webp" alt="《菜籽沟》第 10 跨页">
+    <img src="assets/book/page-11.webp" alt="《菜籽沟》第 11 跨页">
+    <img src="assets/book/page-12.webp" alt="《菜籽沟》第 12 跨页">
+    <img src="assets/book/page-13.webp" alt="《菜籽沟》第 13 跨页">
+    <img src="assets/book/page-14.webp" alt="《菜籽沟》第 14 跨页">
+    <img src="assets/book/page-15.webp" alt="《菜籽沟》第 15 跨页">
+    <img src="assets/book/page-16.webp" alt="《菜籽沟》第 16 跨页">
+    <img src="assets/book/page-17.webp" alt="《菜籽沟》第 17 跨页">
+    <img src="assets/book/page-18.webp" alt="《菜籽沟》第 18 跨页">
+  </template>
+</body>
+</html>

@@ -1,0 +1,299 @@
+.project-folders .section-heading {
+  margin-bottom: 38px;
+}
+
+.folder-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 3.2vw, 48px);
+  padding: 105px 10px 24px;
+}
+
+.folder-group {
+  --folder-back: #bda0d6;
+  --folder-front: #ead3f8;
+  --folder-shade: #c3a0dd;
+  --folder-tilt: -7deg;
+  --folder-offset: 0px;
+  position: relative;
+  min-width: 0;
+}
+
+.folder-link {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-height: clamp(94px, 15vw, 172px);
+  padding: 0;
+  isolation: isolate;
+  border: 1px solid #fff5;
+  border-radius: 8px 16px 16px 16px;
+  background: var(--folder-back);
+  color: #24152f;
+  box-shadow: 0 14px 24px #07051270, inset 0 1px #fffa;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transform: translateY(var(--folder-offset)) rotate(var(--folder-tilt));
+  transition: transform .28s ease, box-shadow .28s ease;
+}
+
+.folder-link::before {
+  position: absolute;
+  bottom: calc(100% - 4px);
+  left: -1px;
+  width: 48%;
+  height: 23px;
+  content: '';
+  border: 1px solid #fff7;
+  border-bottom: 0;
+  border-radius: 10px 21px 0 0;
+  background: var(--folder-back);
+}
+
+.folder-link::after {
+  position: absolute;
+  top: 8%;
+  right: 8%;
+  left: 8%;
+  height: 63%;
+  content: '';
+  border-radius: 7px;
+  background: #fbf2ff;
+  opacity: 0;
+  transform: translateY(5%);
+  transition: transform .44s cubic-bezier(.2, .8, .3, 1), opacity .2s ease;
+  pointer-events: none;
+}
+
+.folder-link > span {
+  position: absolute;
+  z-index: 1;
+  inset: -1px;
+  display: flex;
+  align-items: flex-end;
+  padding: clamp(14px, 2.6vw, 28px);
+  border: 1px solid #fff7;
+  border-radius: inherit;
+  background: linear-gradient(145deg, var(--folder-front) 10%, var(--folder-shade));
+  font-size: clamp(1.15rem, 2.5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.1;
+  transform-origin: 50% 100%;
+  transition: transform .44s cubic-bezier(.2, .8, .3, 1), box-shadow .3s ease;
+}
+
+.folder-group:nth-child(2) {
+  --folder-back: #9fa6d4;
+  --folder-front: #e3e6ff;
+  --folder-shade: #aeb8e8;
+  --folder-tilt: 6deg;
+  --folder-offset: 13px;
+}
+
+.folder-group:nth-child(3) {
+  --folder-back: #c997b0;
+  --folder-front: #f5d9e6;
+  --folder-shade: #dfa9c6;
+  --folder-tilt: -4deg;
+  --folder-offset: -5px;
+}
+
+.folder-group:nth-child(4) {
+  --folder-back: #b1a5db;
+  --folder-front: #e4dbfa;
+  --folder-shade: #b9a9e9;
+  --folder-tilt: 8deg;
+  --folder-offset: 12px;
+}
+
+.folder-group[data-open] {
+  z-index: 1;
+}
+
+.folder-group[data-open] .folder-link,
+.folder-link:focus-visible {
+  transform: translateY(-7px) rotate(0deg);
+  box-shadow: 0 20px 42px #070512a0, inset 0 1px #fffa;
+}
+
+.folder-group[data-open] .folder-link::after {
+  opacity: 1;
+  transform: translateY(-24%);
+}
+
+.folder-group[data-open] .folder-link > span {
+  box-shadow: 0 -5px 15px #24152f40;
+  transform: perspective(660px) rotateX(-32deg);
+}
+
+.folder-menu {
+  position: absolute;
+  z-index: 2;
+  inset-inline: -4px;
+  bottom: calc(100% - 8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 4px 32px;
+}
+
+.folder-menu[hidden] {
+  display: none;
+}
+
+.folder-pill {
+  --pill-delay: 0ms;
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 11px;
+  border: 1px solid #f4e3ff;
+  border-radius: 99px;
+  background: #f7e9ff;
+  color: #291937;
+  box-shadow: 0 4px 13px #0c081b70;
+  font-size: .875rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+  animation: folder-pill-rise .44s cubic-bezier(.2, 1.3, .42, 1) var(--pill-delay) both,
+    folder-pill-drift 3.4s ease-in-out calc(.44s + var(--pill-delay)) infinite;
+}
+
+.folder-pill:nth-child(2) {
+  --pill-delay: 75ms;
+}
+
+.folder-pill:hover,
+.folder-pill:focus-visible {
+  background: #fff6ff;
+  animation-play-state: running, paused;
+}
+
+@keyframes folder-pill-rise {
+  from { opacity: 0; transform: translateY(24px) scale(.78); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes folder-pill-drift {
+  50% { translate: 0 -4px; }
+}
+
+.folder-link:focus-visible,
+.folder-pill:focus-visible,
+.project-tabs a:focus-visible {
+  outline: 2px solid #f5d5ff;
+  outline-offset: 5px;
+}
+
+.project-library {
+  padding-top: clamp(56px, 9vw, 116px);
+  min-height: 82svh;
+}
+
+.project-library h1 {
+  margin: 25px 0;
+  font-size: clamp(2.35rem, 7vw, 5.5rem);
+  line-height: 1.1;
+  letter-spacing: -.05em;
+}
+
+.project-tabs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.project-tabs a {
+  padding: 10px 16px;
+  border: 1px solid #ad93bf64;
+  border-radius: 99px;
+  color: #f5defe;
+  font-size: .95rem;
+}
+
+.project-tabs a:hover,
+.project-library:has(#skill:target) a[href="#skill"],
+.project-library:has(#agent:target) a[href="#agent"],
+.project-library:has(#workbench:target) a[href="#workbench"],
+.project-library:has(#plugins:target) a[href="#plugins"],
+.project-library:not(:has(.project-panel:target)) a[href="#skill"] {
+  background: #e0b8f8;
+  color: #221331;
+}
+
+.project-panel {
+  scroll-margin-top: 20px;
+  max-width: 920px;
+  padding: clamp(23px, 4vw, 42px);
+  border: 1px solid #b292de55;
+  border-radius: 20px;
+  background: #211b32;
+}
+
+.project-panel:not(:target) {
+  display: none;
+}
+
+.project-panels:not(:has(.project-panel:target)) .project-panel:first-child {
+  display: block;
+}
+
+.project-panel h2 {
+  margin: 0 0 13px;
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+}
+
+.project-panel p {
+  margin: 0;
+  color: #d1c3df;
+  line-height: 1.65;
+}
+
+.project-cases {
+  margin: 23px 0 0;
+  padding: 20px 0 0;
+  border-top: 1px solid #b292de40;
+  list-style: none;
+}
+
+.project-cases h3 {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+}
+
+.project-cases a {
+  display: inline-block;
+  margin-top: 12px;
+}
+
+@media (max-width: 800px) {
+  .folder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 110px;
+    padding-bottom: 24px;
+  }
+
+  .folder-pill {
+    min-height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .folder-link,
+  .folder-link::after,
+  .folder-link > span {
+    transition: none;
+  }
+
+  .folder-pill {
+    animation: none;
+  }
+}
