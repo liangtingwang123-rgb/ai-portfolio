@@ -48,15 +48,15 @@ const skills = [
 
 
 const agents = [
-  ...skills,
   {
-    title: '雅思口语教练',
-    package: 'ielts-speaking-coach',
-    category: '语言学习',
-    description: '按 Part 1、Part 2、Part 3 进行口语模拟，结合回答提供反馈和复习计划。',
-    purpose: '完整口语模考、专项口语练习和练后复盘。',
-    input: '当前学习目标、题库和可供分析的语音或文字回答。',
-    output: '逐项反馈、重点纠错、表达改写和复习计划。评分为练习参考。',
+    title: 'AI 第二大脑内容创作系统',
+    package: 'content-second-brain',
+    category: '内容创作',
+    description: '在 Obsidian 中组织定位、对标素材、内容规律、选题、草稿与发布复盘。',
+    purpose: '通过项目 Agent 规则配合规律提取、选题生成和内容写作三个 Skill，推进可追溯的内容生产流程。',
+    input: '自行准备 Obsidian 内容库、个人定位和带来源的对标素材。选题首次生成需至少 10 条有效素材。',
+    output: '候选内容规律、选题池、素材包、AI 初稿和最终发布稿。关键确认环节由创作者审核。',
+    installation: '下载包含项目 AGENTS.md、三个配套 Skill 和目录搭建说明。需要自行准备定位与素材，并在 Codex 中打开内容库使用。',
   },
 ];
 
@@ -79,12 +79,20 @@ function createLibrary(root, items, label) {
 
   function openSkill(skill) {
     const download = detail.querySelector('.skill-download');
-    download.href = `skills/${skill.package}.zip`;
-    download.download = `${skill.package}.zip`;
+    download.hidden = !skill.package;
+    if (skill.package) {
+      download.href = `skills/${skill.package}.zip`;
+      download.download = `${skill.package}.zip`;
+    } else {
+      download.removeAttribute('href');
+      download.removeAttribute('download');
+    }
     for (const field of detailFields) {
       field.textContent = skill[field.dataset.detail];
     }
-    download.textContent = label === 'Agent' ? '下载 Agent（Skill 格式）' : '下载 Skill';
+    download.textContent = label === 'Agent' ? '下载 Agent 配置包' : '下载 Skill';
+    detail.querySelector('.skill-install-help').textContent = skill.installation
+      || '下载后解压，将其中的技能文件夹放入支持 SKILL.md 的工具的技能目录，再重新打开工具即可使用。下载包内附安装说明。';
     detail.showModal();
   }
 

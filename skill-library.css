@@ -219,6 +219,10 @@
   justify-self: start;
 }
 
+.skill-download[hidden] {
+  display: none;
+}
+
 .skill-install-help {
   margin: 0;
   color: #c1add0;
