@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="works.css">
   <link rel="stylesheet" href="projects.css">
+  <link rel="stylesheet" href="skill-library.css">
+  <script src="skill-library.js" defer></script>
 </head>
 <body>
   <main class="section project-library">
@@ -20,9 +22,18 @@
       <a href="#plugins">插件</a>
     </nav>
     <div class="project-panels">
-      <section class="project-panel" id="skill" aria-labelledby="skill-title">
-        <h2 id="skill-title">Skill</h2>
-        <p>项目清单待补充。</p>
+      <section class="project-panel skill-library" id="skill" aria-labelledby="skill-title">
+        <div class="skill-library-heading">
+          <h2 id="skill-title">我的 Skill</h2>
+          <label class="skill-search">
+            <span>搜索</span>
+            <input id="skill-search" type="search" placeholder="名称或用途" autocomplete="off" aria-controls="skill-cards">
+          </label>
+        </div>
+        <div class="skill-filters" id="skill-filters" role="group" aria-label="按类型筛选"></div>
+        <p id="skill-results" class="skill-results" role="status"></p>
+        <ul class="skill-cards" id="skill-cards"></ul>
+        <noscript><p>开启 JavaScript 后即可浏览技能卡片。</p></noscript>
       </section>
       <section class="project-panel" id="agent" aria-labelledby="agent-title">
         <h2 id="agent-title">Agent</h2>
@@ -31,10 +42,6 @@
       <section class="project-panel" id="workbench" aria-labelledby="workbench-title">
         <h2 id="workbench-title">工作台</h2>
         <ul class="project-cases">
-          <li>
-            <h3>IELTS 备考工作台</h3>
-            <a class="button button-primary" href="https://ada-workbench-lab.lovable.app/demos/ielts-os-v21.html" target="_blank" rel="noopener noreferrer">打开工作台</a>
-          </li>
           <li>
             <h3>达人社教培 AI 工作台 Demo</h3>
             <p>面向独立老师和小型教培机构，展示业务工作台、经营诊断和报告流程。</p>
@@ -48,5 +55,22 @@
       </section>
     </div>
   </main>
+  <dialog class="skill-detail" aria-labelledby="skill-detail-title">
+    <div class="skill-detail-frame">
+      <form method="dialog">
+        <button class="skill-close" aria-label="关闭技能详情" autofocus>×</button>
+      </form>
+      <header>
+        <p class="skill-tag" data-detail="category"></p>
+        <h2 id="skill-detail-title" data-detail="title"></h2>
+        <p class="skill-detail-description" data-detail="description"></p>
+      </header>
+      <dl>
+        <div><dt>适用场景</dt><dd data-detail="purpose"></dd></div>
+        <div><dt>需要提供</dt><dd data-detail="input"></dd></div>
+        <div><dt>会产出</dt><dd data-detail="output"></dd></div>
+      </dl>
+    </div>
+  </dialog>
 </body>
 </html>

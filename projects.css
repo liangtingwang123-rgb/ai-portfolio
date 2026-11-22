@@ -169,6 +169,12 @@
   --pill-delay: 75ms;
 }
 
+#folder-workbench-menu .folder-pill {
+  animation: folder-pill-rise .44s cubic-bezier(.2, 1.3, .42, 1) var(--pill-delay) both;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
 .folder-pill:hover,
 .folder-pill:focus-visible {
   background: #fff6ff;
@@ -269,12 +275,6 @@
   font-size: 1.25rem;
 }
 
-.project-cases li + li {
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid #b292de40;
-}
-
 .project-cases a {
   display: inline-block;
   margin-top: 12px;
@@ -299,7 +299,8 @@
     transition: none;
   }
 
-  .folder-pill {
+  .folder-pill,
+  #folder-workbench-menu .folder-pill {
     animation: none;
   }
 }

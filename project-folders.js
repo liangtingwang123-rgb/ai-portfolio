@@ -44,7 +44,7 @@
     const entry = { group, button, menu };
     group.addEventListener('pointerenter', event => {
       if (!hoverCapable.matches || event.pointerType === 'touch') return;
-      if (active && active !== entry && active.menu.contains(document.activeElement)) return;
+      if (active && active !== entry && (pinned || active.menu.contains(document.activeElement))) return;
       open(entry);
     });
 
