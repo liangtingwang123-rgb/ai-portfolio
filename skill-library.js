@@ -1,6 +1,7 @@
 const skills = [
   {
     title: '小红书文案大师',
+    package: 'xiaohongshu-copywriter',
     category: '内容创作',
     description: '从真实素材提炼选题，写出适合小红书的笔记和封面文案。',
     purpose: '做经验分享、教程笔记或案例复盘，也可以改写已有草稿。',
@@ -9,6 +10,7 @@ const skills = [
   },
   {
     title: '朋友圈文案大师',
+    package: 'moments-copywriter',
     category: '内容创作',
     description: '把真实经历、客户案例或活动信息写成朋友圈文案。',
     purpose: '写日常分享、课程预热、案例复盘和产品介绍。',
@@ -17,6 +19,7 @@ const skills = [
   },
   {
     title: '网页设计大师',
+    package: 'web-design-studio',
     category: '设计与教学',
     description: '从需求和参考图出发，设计并制作可运行的响应式网页。',
     purpose: '搭建个人作品集、产品落地页，也可以按反馈迭代现有网页。',
@@ -25,6 +28,7 @@ const skills = [
   },
   {
     title: '造课大师',
+    package: 'course-architect',
     category: '设计与教学',
     description: '把已有经验或主题整理成一套有学习目标、讲解和练习的课程。',
     purpose: '设计直播课、训练营、付费课程或企业内训。',
@@ -33,6 +37,7 @@ const skills = [
   },
   {
     title: '创始人思维克隆体',
+    package: 'founder-interview',
     category: '访谈与决策',
     description: '通过结构化访谈梳理创始人的判断依据和决策原则。',
     purpose: '记录创始人的关键决策案例，整理供团队查阅和讨论的决策资料。',
@@ -57,6 +62,9 @@ function skillText(className, text) {
 }
 
 function openSkill(skill) {
+  const download = detail.querySelector('.skill-download');
+  download.href = `skills/${skill.package}.zip`;
+  download.download = `${skill.package}.zip`;
   for (const field of detailFields) {
     field.textContent = skill[field.dataset.detail];
   }

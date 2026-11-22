@@ -215,6 +215,17 @@
   border-top: 1px solid #5a486b;
 }
 
+.skill-download {
+  justify-self: start;
+}
+
+.skill-install-help {
+  margin: 0;
+  color: #c1add0;
+  font-size: .88rem;
+  line-height: 1.65;
+}
+
 .skill-detail dt {
   margin-bottom: 4px;
   color: #edd3fc;
