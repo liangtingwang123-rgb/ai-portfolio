@@ -46,87 +46,108 @@ const skills = [
   },
 ];
 
-const search = document.querySelector('#skill-search');
-const filters = document.querySelector('#skill-filters');
-const grid = document.querySelector('#skill-cards');
-const results = document.querySelector('#skill-results');
+
+const agents = [
+  ...skills,
+  {
+    title: '雅思口语教练',
+    package: 'ielts-speaking-coach',
+    category: '语言学习',
+    description: '按 Part 1、Part 2、Part 3 进行口语模拟，结合回答提供反馈和复习计划。',
+    purpose: '完整口语模考、专项口语练习和练后复盘。',
+    input: '当前学习目标、题库和可供分析的语音或文字回答。',
+    output: '逐项反馈、重点纠错、表达改写和复习计划。评分为练习参考。',
+  },
+];
+
 const detail = document.querySelector('.skill-detail');
 const detailFields = detail.querySelectorAll('[data-detail]');
-let activeCategory = '';
 
-function skillText(className, text) {
-  const element = document.createElement('span');
-  element.className = className;
-  element.textContent = text;
-  return element;
-}
+function createLibrary(root, items, label) {
+  const search = root.querySelector('input[type=search]');
+  const filters = root.querySelector('.skill-filters');
+  const grid = root.querySelector('.skill-cards');
+  const results = root.querySelector('.skill-results');
+  let activeCategory = '';
 
-function openSkill(skill) {
-  const download = detail.querySelector('.skill-download');
-  download.href = `skills/${skill.package}.zip`;
-  download.download = `${skill.package}.zip`;
-  for (const field of detailFields) {
-    field.textContent = skill[field.dataset.detail];
+  function skillText(className, text) {
+    const element = document.createElement('span');
+    element.className = className;
+    element.textContent = text;
+    return element;
   }
-  detail.showModal();
-}
 
-const cards = skills.map((skill, index) => {
-  const item = document.createElement('li');
-  const button = document.createElement('button');
-  const title = skillText('skill-card-title', skill.title);
-  title.id = `skill-card-title-${index}`;
-  button.type = 'button';
-  button.className = 'skill-card';
-  button.setAttribute('aria-labelledby', title.id);
-  button.setAttribute('aria-haspopup', 'dialog');
-  button.append(
-    skillText('skill-tag', skill.category),
-    title,
-    skillText('skill-card-description', skill.description),
-    skillText('skill-card-action', '查看详情 →'),
-  );
-  button.addEventListener('click', () => openSkill(skill));
-  item.append(button);
-  grid.append(item);
-  return { skill, item, terms: Object.values(skill).join(' ').toLowerCase() };
-});
-
-function updateSkills() {
-  const query = search.value.trim().toLowerCase();
-  let visible = 0;
-  for (const { skill, item, terms } of cards) {
-    const matchesCategory = !activeCategory || skill.category === activeCategory;
-    const matches = matchesCategory && terms.includes(query);
-    item.hidden = !matches;
-    if (matches) visible += 1;
+  function openSkill(skill) {
+    const download = detail.querySelector('.skill-download');
+    download.href = `skills/${skill.package}.zip`;
+    download.download = `${skill.package}.zip`;
+    for (const field of detailFields) {
+      field.textContent = skill[field.dataset.detail];
+    }
+    download.textContent = label === 'Agent' ? '下载 Agent（Skill 格式）' : '下载 Skill';
+    detail.showModal();
   }
-  results.textContent = visible ? `共 ${visible} 项 Skill` : '没有符合条件的 Skill';
-}
 
-const categoryCounts = new Map([['', skills.length]]);
-for (const skill of skills) {
-  categoryCounts.set(skill.category, (categoryCounts.get(skill.category) ?? 0) + 1);
-}
-
-for (const [category, count] of categoryCounts) {
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'skill-filter';
-  button.textContent = `${category || '全部'} ${count}`;
-  button.setAttribute('aria-pressed', String(!category));
-  button.setAttribute('aria-controls', grid.id);
-  button.addEventListener('click', () => {
-    filters.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
-    button.setAttribute('aria-pressed', 'true');
-    activeCategory = category;
-    updateSkills();
+  const cards = items.map((skill, index) => {
+    const item = document.createElement('li');
+    const button = document.createElement('button');
+    const title = skillText('skill-card-title', skill.title);
+    title.id = `${root.id}-card-title-${index}`;
+    button.type = 'button';
+    button.className = 'skill-card';
+    button.setAttribute('aria-labelledby', title.id);
+    button.setAttribute('aria-haspopup', 'dialog');
+    button.append(
+      skillText('skill-tag', skill.category),
+      title,
+      skillText('skill-card-description', skill.description),
+      skillText('skill-card-action', '查看详情 →'),
+    );
+    button.addEventListener('click', () => openSkill(skill));
+    item.append(button);
+    grid.append(item);
+    return { skill, item, terms: Object.values(skill).join(' ').toLowerCase() };
   });
-  filters.append(button);
+
+  function updateSkills() {
+    const query = search.value.trim().toLowerCase();
+    let visible = 0;
+    for (const { skill, item, terms } of cards) {
+      const matchesCategory = !activeCategory || skill.category === activeCategory;
+      const matches = matchesCategory && terms.includes(query);
+      item.hidden = !matches;
+      if (matches) visible += 1;
+    }
+    results.textContent = visible ? `共 ${visible} 项 ${label}` : `没有符合条件的 ${label}`;
+  }
+
+  const categoryCounts = new Map([['', items.length]]);
+  for (const skill of items) {
+    categoryCounts.set(skill.category, (categoryCounts.get(skill.category) ?? 0) + 1);
+  }
+
+  for (const [category, count] of categoryCounts) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'skill-filter';
+    button.textContent = `${category || '全部'} ${count}`;
+    button.setAttribute('aria-pressed', String(!category));
+    button.setAttribute('aria-controls', grid.id);
+    button.addEventListener('click', () => {
+      filters.querySelector('[aria-pressed="true"]').setAttribute('aria-pressed', 'false');
+      button.setAttribute('aria-pressed', 'true');
+      activeCategory = category;
+      updateSkills();
+    });
+    filters.append(button);
+  }
+
+  search.addEventListener('input', updateSkills);
+  updateSkills();
 }
 
-search.addEventListener('input', updateSkills);
 detail.addEventListener('click', (event) => {
   if (event.target === detail) detail.close();
 });
-updateSkills();
+createLibrary(document.querySelector('#skill'), skills, 'Skill');
+createLibrary(document.querySelector('#agent'), agents, 'Agent');

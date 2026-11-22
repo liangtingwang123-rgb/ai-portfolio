@@ -35,9 +35,18 @@
         <ul class="skill-cards" id="skill-cards"></ul>
         <noscript><p>开启 JavaScript 后即可浏览技能卡片。</p></noscript>
       </section>
-      <section class="project-panel" id="agent" aria-labelledby="agent-title">
-        <h2 id="agent-title">Agent</h2>
-        <p>项目清单待补充。</p>
+      <section class="project-panel skill-library" id="agent" aria-labelledby="agent-title">
+        <div class="skill-library-heading">
+          <h2 id="agent-title">我的 Agent</h2>
+          <label class="skill-search">
+            <span>搜索</span>
+            <input id="agent-search" type="search" placeholder="名称或用途" autocomplete="off" aria-controls="agent-cards">
+          </label>
+        </div>
+        <div class="skill-filters" id="agent-filters" role="group" aria-label="按类型筛选"></div>
+        <p id="agent-results" class="skill-results" role="status"></p>
+        <ul class="skill-cards" id="agent-cards"></ul>
+        <noscript><p>开启 JavaScript 后即可浏览 Agent 卡片。</p></noscript>
       </section>
       <section class="project-panel" id="workbench" aria-labelledby="workbench-title">
         <h2 id="workbench-title">工作台</h2>
