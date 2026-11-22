@@ -50,13 +50,12 @@ const skills = [
 const agents = [
   {
     title: 'AI 第二大脑内容创作系统',
-    package: 'content-second-brain',
     category: '内容创作',
     description: '在 Obsidian 中组织定位、对标素材、内容规律、选题、草稿与发布复盘。',
     purpose: '通过项目 Agent 规则配合规律提取、选题生成和内容写作三个 Skill，推进可追溯的内容生产流程。',
     input: '自行准备 Obsidian 内容库、个人定位和带来源的对标素材。选题首次生成需至少 10 条有效素材。',
     output: '候选内容规律、选题池、素材包、AI 初稿和最终发布稿。关键确认环节由创作者审核。',
-    installation: '下载包含项目 AGENTS.md、三个配套 Skill 和目录搭建说明。需要自行准备定位与素材，并在 Codex 中打开内容库使用。',
+    installation: '基于 Codex 项目规则与三个配套 Skill 运行，串联规律提取、选题生成和内容写作。',
   },
 ];
 
@@ -79,8 +78,8 @@ function createLibrary(root, items, label) {
 
   function openSkill(skill) {
     const download = detail.querySelector('.skill-download');
-    download.hidden = !skill.package;
-    if (skill.package) {
+    download.hidden = label === 'Agent' || !skill.package;
+    if (!download.hidden) {
       download.href = `skills/${skill.package}.zip`;
       download.download = `${skill.package}.zip`;
     } else {
